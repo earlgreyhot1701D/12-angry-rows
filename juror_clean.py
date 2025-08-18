@@ -1,113 +1,84 @@
 # juror_clean.py
-# Processes structure_samples/*.csv and generates juror_cleaned_output.csv with correct "Jurors Used"
-
 import os
-import re
 import pandas as pd
 import numpy as np
 
-input_folder = "structure_samples"
+input_dir = "structure_samples"
 output_file = "juror_cleaned_output.csv"
 log_file = "clean_log.csv"
 
-# Helpers
-def _normalize(col):
-    c = str(col)
-    c = c.replace("’", "'").replace("‐", "-").replace("–", "-").replace("—", "-")
-    c = re.sub(r"\s+", " ", c).strip()
-    return c
+def clean_column_name(col):
+    if pd.isnull(col):
+        return ""
+    return str(col).strip().lower()
 
-def _find_col(cols, options):
-    for opt in options:
-        for c in cols:
-            if opt in c:
-                return c
+def find_column(columns, keywords):
+    for col in columns:
+        if any(k in col for k in keywords):
+            return col
     return None
 
-def _consolidate_from_cols(row, colnames):
-    for c in colnames:
-        val = row.get(c, np.nan)
-        if pd.notna(val) and str(val).strip() != "":
-            return val
-    return np.nan
+all_data = []
+log_entries = []
 
-# Start cleaning
-cleaned_parts = []
-log = []
-
-for fname in sorted(os.listdir(input_folder)):
-    if not fname.endswith(".csv"):
+for filename in os.listdir(input_dir):
+    if not filename.endswith(".csv"):
         continue
 
-    fpath = os.path.join(input_folder, fname)
-    try:
-        df = pd.read_csv(fpath, dtype=str, encoding="utf-8", low_memory=False)
-    except:
-        try:
-            df = pd.read_csv(fpath, dtype=str, encoding="latin-1", low_memory=False)
-        except Exception as e:
-            log.append({"file": fname, "status": "❌ Error opening", "details": str(e)})
-            continue
+    filepath = os.path.join(input_dir, filename)
+    df = pd.read_csv(filepath)
 
-    if df.empty:
-        log.append({"file": fname, "status": "⚠️ Empty", "details": "no rows"})
-        continue
+    columns = [clean_column_name(col) for col in df.columns]
+    df.columns = columns
 
-    df.columns = [_normalize(c) for c in df.columns]
-
-    # Find required columns
-    case_no_col = _find_col(df.columns, ["Case No"])
-    reporting_col = _find_col(df.columns, ["Total Jurors Reporting", "Jurors Reporting"])
-    not_used_col = _find_col(df.columns, ["Not Used", "Not Used From Pool", "Unused"])
-    case_type_col = _find_col(df.columns, ["Case Type"])
-    civil_col = _find_col(df.columns, ["Civil"])
-    charge_cols = [c for c in df.columns if "Description of Charges" in c or "(Charges)" in c]
-    penal_cols = [c for c in df.columns if "Penal Code" in c or "Penal Codes" in c]
+    case_no_col = find_column(columns, ["case"])
+    reporting_col = find_column(columns, ["jurors reporting", "reporting"])
+    not_used_col = find_column(columns, ["not used", "not used from pool", "unused"])
+    went_trial_col = find_column(columns, ["went to trial", "went", "trial"])
+    not_trial_col = find_column(columns, ["did not go to trial", "didn't go", "didn’t go"])
 
     if not case_no_col or not reporting_col:
-        log.append({"file": fname, "status": "❌ Missing", "details": f"case_no={case_no_col}, reporting={reporting_col}"})
+        log_entries.append(f"{filename},SKIPPED,Missing required columns")
         continue
 
-    # Calculate Jurors Used
     df["Jurors Reporting"] = pd.to_numeric(df[reporting_col], errors="coerce")
-    df["Not Used"] = pd.to_numeric(df.get(not_used_col, np.nan), errors="coerce")
 
-    if "Not Used" in df:
-        df["Jurors Used"] = df["Jurors Reporting"] - df["Not Used"]
+    if not_used_col:
+        df["Jurors Not Used"] = pd.to_numeric(df[not_used_col], errors="coerce")
+        df["Jurors Used"] = df["Jurors Reporting"] - df["Jurors Not Used"]
     else:
-        df["Jurors Used"] = np.nan  # Leave blank if "Not Used" column isn't present
+        df["Jurors Used"] = np.nan
+        df["Jurors Not Used"] = np.nan
 
-    # Get charges and penal codes
-    df["Charges"] = df.apply(lambda r: _consolidate_from_cols(r, charge_cols), axis=1) if charge_cols else np.nan
-    df["Penal Codes"] = df.apply(lambda r: _consolidate_from_cols(r, penal_cols), axis=1) if penal_cols else np.nan
+    df["Charge Description"] = df[went_trial_col].fillna("") + " | " + df[not_trial_col].fillna("")
+    df["Source File"] = filename
 
-    # Collect final columns
-    output = pd.DataFrame({
-        "Case No.": df[case_no_col],
-        "Jurors Reporting": df["Jurors Reporting"],
-        "Jurors Used": df["Jurors Used"],
-        "Case Type": df[case_type_col] if case_type_col else "",
-        "Civil": df[civil_col] if civil_col else "",
-        "Charges": df["Charges"],
-        "Penal Codes": df["Penal Codes"],
-        "Source File": fname
-    })
+    output_df = df[[
+        case_no_col,
+        "Jurors Reporting",
+        "Jurors Used",
+        "Jurors Not Used",
+        "Charge Description",
+        "Source File"
+    ]].copy()
 
-    cleaned_parts.append(output)
+    output_df.rename(columns={case_no_col: "Case No."}, inplace=True)
 
-    log.append({
-        "file": fname,
-        "status": "✅ Cleaned",
-        "details": {
-            "rows": len(output),
-            "used_formula": f"{reporting_col} - {not_used_col if not_used_col else '???'}"
-        }
-    })
+    # 🧼 DROP incomplete rows
+    output_df = output_df.dropna(subset=["Case No.", "Jurors Reporting"])
 
-# Final output
-if cleaned_parts:
-    all_cleaned = pd.concat(cleaned_parts, ignore_index=True)
-    all_cleaned.to_csv(output_file, index=False)
+    all_data.append(output_df)
+    log_entries.append(f"{filename},OK,Processed")
 
-pd.DataFrame(log).to_csv(log_file, index=False)
-print(f"Done. Output written to {output_file} and {log_file}")
+combined = pd.concat(all_data, ignore_index=True)
+combined.to_csv(output_file, index=False)
+
+with open(log_file, "w") as f:
+    f.write("Filename,Status,Message\n")
+    for entry in log_entries:
+        f.write(entry + "\n")
+
+print(f"Cleaning complete. Output saved to {output_file}.")
+
+
+
