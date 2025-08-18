@@ -4,9 +4,9 @@ This folder contains a redacted sample of the full output from the jury utilizat
 
 ## 🔐 Redaction Notes
 
-- **Case numbers** have been anonymized and replaced with placeholder values such as `CASE00001`, `CASE00002`, etc.
+- **Case numbers** have been anonymized and replaced with placeholder values such as `[REDACTED]`.
 - **Location information and Source File** have been anonymized and replaced with placeholder values such as `X`
-- **Only 100 rows** are included here to demonstrate structure and format without exposing sensitive data.
+- **Only 20 rows** are included here to demonstrate structure and format without exposing sensitive data.
 - The original data contains actual Superior Court case numbers and was not uploaded due to confidentiality.
 
 ## 📄 File Contents
