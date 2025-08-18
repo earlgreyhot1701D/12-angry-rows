@@ -1,6 +1,6 @@
 # 12 Angry Rows: A Jury Utilization Pipeline
 
-This project cleans and analyzes historical jury panel data from the Superior Court. It transforms multi-year/multi-location Excel exports into structured, analysis-ready datasets that can be used to evaluate how jurors were summoned, used, or not used — by case type, location, and year.
+This project cleans and analyzes historical jury panel data from the Santa Barbara Superior Court. It transforms multi-year/multi-location Excel exports into structured, analysis-ready datasets that can be used to evaluate how jurors were summoned, used, or not used — by case type, location, and year.
 
 This is a civic-tech project built with transparency, reproducibility, and local court impact in mind.
 
@@ -42,8 +42,8 @@ juror_project/
 ## 🔐 Data Ethics and Redaction
 
 To protect confidentiality:
-- No real case numbers, locations or source file information is included in the public repo.
-- The file `juror_etl_output_SAMPLE.csv` contains **only sample data with anonymized case IDs**.
+- No real case numbers are included in the public repo.
+- The file `juror_etl_output_SAMPLE.csv` contains **only sample data with anonymized case IDs and calculated 'Jurors Not Used' column**.
 - Real exports are retained privately and used only for internal analysis.
 
 ---
@@ -68,7 +68,7 @@ This project was influenced by [Financial Audit AI Tool](https://github.com/flwr
 - Prioritizing signal-bearing columns and ignoring unnecessary noise
 - Using regex + rule-based classification instead of complex models when appropriate
 
-Their structure informed the design of a resilient cleaning and transformation pipeline for messy, multi-year court data.
+Their structure informed our design of a resilient cleaning and transformation pipeline for messy, multi-year court data.
 
 ---
 
@@ -124,59 +124,19 @@ Thanks to:
 
 ---
 
-## 🧪 How to Run This Project
-
-This project requires **Python 3.9+** and basic knowledge of using the terminal or PowerShell.
-
-### 🧰 Setup
-
-1. Clone or download the repo:
-   ```
-   git clone https://github.com/yourusername/12-angry-rows.git
-   cd 12-angry-rows
-   ```
-
-2. (Optional) Create a virtual environment:
-   ```
-   python -m venv .venv
-   .venv\Scripts\activate    # Windows
-   ```
-
-3. Install dependencies (only standard library used — no install needed unless you want to add tools like pandas profiling or Jupyter).
-
 ---
 
-### 🧼 Run the Cleaning Pipeline
+## 🗂️ Version History
 
-**Step 1: Split Excel workbook**
-```bash
-python juror_structure.py
-```
+### v1.1 – August 2025
+- Added `Jurors Not Used` as a calculated column (Reporting - Used)
+- Filtered out rows missing essential values (`Case No.` or `Jurors Reporting`)
+- Improved consistency across edge-case CSVs
 
-**Step 2: Clean and consolidate CSVs**
-```bash
-python juror_clean.py
-```
+### v1.0 – Initial Release
+- Extracted multi-year, multi-sheet jury data from Excel
+- Cleaned and standardized reporting fields
+- Consolidated charges from multiple description columns
+- Tagged each row with its source file (e.g., by year or location)
 
-**Step 3: Transform and calculate metrics**
-```bash
-python juror_etl.py
-```
-
-Final output will be saved as:
-```
-juror_etl_output.csv
-```
-
----
-
-### 🧪 Sample Data
-
-If you're not running the full pipeline, you can explore the structure using:
-
-```
-sample_data/juror_etl_output_SAMPLE.csv
-```
-
----
 
