@@ -51,7 +51,7 @@ log_rows = []
 # Patterns for each canonical field
 CASE_NO_PREFS = [("eq", "Case No."), ("startswith", "Case No."), ("contains", "Case No")]
 JURORS_REPORTING_PREFS = [("eq", "Jurors Reporting"), ("startswith", "Jurors Reporting"), ("contains", "Total Jurors Reporting")]
-JURORS_USED_PREFS = [("eq", "Jurors Used"), ("eq", "Used"), ("contains", "Used")]
+JURORS_NOT_USED_PREFS = [("eq", "Not Used"), ("contains", "Not Used")]
 CASE_TYPE_PREFS = [("eq", "Case Type"), ("contains", "Case Type")]
 CIVIL_PREFS = [("eq", "Civil"), ("contains", "Civil")]
 CHARGE_PREFS = [("regex", r"Description of Charges"), ("regex", r"\(Charges\)")]
@@ -85,14 +85,14 @@ for fname in sorted(os.listdir(input_folder)):
     # Locate required columns
     case_no_col = _find_col(norm_cols, CASE_NO_PREFS)
     jr_col = _find_col(norm_cols, JURORS_REPORTING_PREFS)
-    ju_col = _find_col(norm_cols, JURORS_USED_PREFS)
+    jnu_col = _find_col(norm_cols, JURORS_NOT_USED_PREFS)
     ct_col = _find_col(norm_cols, CASE_TYPE_PREFS)
     civil_col = _find_col(norm_cols, CIVIL_PREFS)
 
     missing = [name for name, col in [
         ("Case No.", case_no_col),
         ("Jurors Reporting", jr_col),
-        ("Jurors Used", ju_col),
+        ("Jurors Not Used", jnu_col),
     ] if col is None]
 
     if missing:
@@ -119,7 +119,7 @@ for fname in sorted(os.listdir(input_folder)):
     out_cols = {
         "Case No.": case_no_col,
         "Jurors Reporting": jr_col,
-        "Jurors Used": ju_col,
+        "Jurors Not Used": jnu_col,
         "Case Type": ct_col if ct_col else "",
         "Civil": civil_col if civil_col else "",
         "Charges": "Charges",
@@ -131,13 +131,12 @@ for fname in sorted(os.listdir(input_folder)):
     rename_map = {v: k for k, v in out_cols.items() if v}
     cleaned.rename(columns=rename_map, inplace=True)
 
-    for num_col in ["Jurors Reporting", "Jurors Used"]:
+    for num_col in ["Jurors Reporting", "Jurors Not Used"]:
         if num_col in cleaned.columns:
             cleaned[num_col] = pd.to_numeric(cleaned[num_col], errors="coerce")
 
-    # ➕ Calculate Jurors Not Used
-    if "Jurors Reporting" in cleaned.columns and "Jurors Used" in cleaned.columns:
-        cleaned["Jurors Not Used"] = cleaned["Jurors Reporting"] - cleaned["Jurors Used"]
+    # ➕ Calculate Jurors Used
+    cleaned["Jurors Used"] = cleaned["Jurors Reporting"] - cleaned["Jurors Not Used"]
 
     # ➕ Calculate Utilization Rate (%)
     cleaned["Utilization Rate"] = np.where(
@@ -158,7 +157,7 @@ for fname in sorted(os.listdir(input_folder)):
             "mapped": {
                 "Case No.": case_no_col,
                 "Jurors Reporting": jr_col,
-                "Jurors Used": ju_col,
+                "Jurors Not Used": jnu_col,
                 "Case Type": ct_col,
                 "Civil": civil_col,
                 "Charge Cols": charge_cols,
