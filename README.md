@@ -147,4 +147,16 @@ Thanks to:
 - Consolidated charges from multiple description columns
 - Tagged each row with its source file (e.g., by year or location)
 
+## 🔎 Validation Process
+
+To ensure confidence in calculated *Jurors Not Used* values across 11 years of manually structured jury data, I implemented a dual-path validation process:
+
+- Cleaned values were programmatically extracted via `juror_clean.py`.
+- Utilization Rates were recalculated and compared against source-provided figures.
+- A Validation Confidence Report was generated, identifying:
+  - Missing values in 33.1% of records
+  - Mismatches in 11.5% of rows
+- Where discrepancies occurred, calculated values were favored, with clear documentation provided.
+
+This project is **directional, not empirical**. It establishes a baseline for long-term operational improvement, and is transparent about limitations in legacy reporting tools.
 
