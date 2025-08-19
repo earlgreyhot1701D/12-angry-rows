@@ -1,21 +1,21 @@
-Case No.,Jurors Reporting,Jurors Used,Utilization Rate,Case Type,Civil,Case Category,Charges,Penal Codes,Year,Location,Source File
-[REDACTED],70,44,0.6286,M, ,Misdemeanor,DUI ALCOHOL,MVC23152(a),2014,X,X
-[REDACTED],55,37,0.6727,M, ,Misdemeanor,WILLFUL CRUELTY TO CHILD,MPC273a(b),2014,X,X
-[REDACTED],98,60,0.6122,C,1,Civil,Unlimited Auto (22),,2014,X,X
-[REDACTED],63,36,0.5714,M, ,Misdemeanor,CRUELTY TO ANIMAL,MPC597(b),2014,X,X
-[REDACTED],104,73,0.7019,C,1,Civil,Unlimited Other PI/PD/WD (23),,2014,X,X
-[REDACTED],73,45,0.6164,M, ,Misdemeanor,DUI ALCOHOL,MVC23152(a),2014,X,X
-[REDACTED],71,53,0.7465,M, ,Misdemeanor,BATTERY:SPOUSE/EX SPOUSE/DATE/ETC,MPC243(e)(1),2014,X,X
-[REDACTED],65,63,0.9692,F, ,Felony,ROBBERY,FPC211,2014,X,X
-[REDACTED],67,29,0.4328,M, ,Misdemeanor,BATTERY,MPC242,2014,X,X
-[REDACTED],145,100,0.6897,F, ,Felony,PREVENT/DISSUADE WITNESS VICTIM BY THREAT,FPC136.1(c)(1),2014,X,X
-[REDACTED],73,50,0.6849,M, ,Misdemeanor,INFLICT CORPORAL INJURY ON SPOUSE/ COHABITANT,MPC273.5(a),2014,X,X
-[REDACTED],54,32,0.5926,M, ,Misdemeanor,BATTERY:SPOUSE/EX SPOUSE/DATE/ETC,MPC243(e)(1),2014,X,X
-[REDACTED],105,82,0.781,C,1,Civil,Unlimited Medical Malpractice (45),,2014,X,X
-[REDACTED],150,130,0.8667,C,1,Civil,Unlimited Medical Malpractice (45),,2014,X,X
-[REDACTED],66,46,0.697,C,1,Civil,Unlimited Other PI/PD/WD (23),,2014,X,X
-[REDACTED],64,21,0.3281,C,1,Civil,Unlawful Detainer - Residential Limited (32),,2014,X,X
-[REDACTED],55,55,1,F, ,Felony,INFLICT CORPORAL INJURY ON SPOUSE/COHABITANT,FPC273.5(a),2014,X,X
-[REDACTED],68,46,0.6765,M, ,Misdemeanor,FISHING DL OR ID REQUIRED,MFG7852.27,2014,X,X
-[REDACTED],66,49,0.7424,F, ,Felony,INFLICT CORPORAL INJURY ON SPOUSE/ COHABITANT,FPC273.5(a),2014,X,X
-[REDACTED],60,47,0.7833,F, ,Felony,ASSAULT WITH FORCE LIKELY TO PRODUCE GBI,FPC245(a)(4),2014,X,X
+Jurors Reporting,Jurors Not Used,Utilization Rate,Case Type,Civil,Case Category,Charges,Penal Codes
+45,12,0.7333,Criminal,,Misdemeanor,Petty Theft,PC 484
+38,5,0.8684,Criminal,,Felony,Burglary,PC 459
+52,15,0.7115,Civil,Yes,Personal Injury,Negligence,Civ Code 1714
+61,20,0.6721,Criminal,,Felony,Assault,PC 245
+49,8,0.8367,Civil,Yes,Contract,Breach of Contract,Civ Code 3300
+34,4,0.8824,Criminal,,Misdemeanor,DUI,VC 23152
+58,18,0.6897,Criminal,,Felony,Drug Possession,HS 11350
+41,10,0.7561,Civil,Yes,Employment,Wrongful Termination,Gov Code 12940
+46,7,0.8478,Criminal,,Misdemeanor,Trespassing,PC 602
+39,6,0.8462,Civil,Yes,Property,Landlord-Tenant,Civ Code 1940
+50,13,0.74,Criminal,,Felony,Grand Theft Auto,PC 487
+37,5,0.8649,Criminal,,Misdemeanor,Public Intoxication,PC 647(f)
+59,17,0.7119,Civil,Yes,Medical,Malpractice,BPC 2052
+62,22,0.6452,Criminal,,Felony,Armed Robbery,PC 211
+47,9,0.8085,Civil,Yes,Consumer,Fraud,Civ Code 1770
+36,4,0.8889,Criminal,,Misdemeanor,Loitering,PC 653
+44,6,0.8636,Civil,Yes,Insurance,Bad Faith,Ins Code 790.03
+53,14,0.7358,Criminal,,Felony,Domestic Violence,PC 273.5
+60,19,0.6833,Civil,Yes,Construction,Defect,Civ Code 895
+43,7,0.8372,Criminal,,Misdemeanor,Reckless Driving,VC 23103
