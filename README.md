@@ -160,3 +160,18 @@ To ensure confidence in calculated *Jurors Not Used* values across 11 years of m
 
 This project is **directional, not empirical**. It establishes a baseline for long-term operational improvement, and is transparent about limitations in legacy reporting tools.
 
+📊 Future Dashboard Integration (Phase 2)
+
+In Phase 2 of this project, a visual dashboard will be added to explore trends in jury utilization across 11 years of court operations. This dashboard will include:
+
+- Year-over-year utilization rates
+- Jurors Not Used vs. Jurors Reporting by location
+- Charge-type filtering (Misdemeanor, Felony, Civil)
+- Visualized gaps in data completeness
+- Directional insights for operational planning
+
+This upcoming visualization layer will be built using accessible tools such as Excel, Power BI, or Streamlit — depending on performance and cost constraints.
+
+Stay tuned for updates in the next commit cycle.
+
+
