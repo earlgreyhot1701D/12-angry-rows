@@ -128,6 +128,28 @@ Thanks to:
 
 ## 🗂️ Version History
 
+## 📦 Version 1.3 – August 2025: Corrected Juror Utilization Calculation
+
+During QA testing of structured samples, we identified that `Jurors Used` and `Utilization Rate` were **inverted**. The ETL previously treated the "Not Used" column as if it represented jurors used — leading to underreporting of actual utilization.
+
+This version now:
+
+- **Calculates `Jurors Used`** as `Jurors Reporting - Jurors Not Used`
+- **Computes `Utilization Rate`** using that corrected value
+- Aligns with **NCSC standard reporting**, where Utilization Rate = % of jurors used out of those who reported
+- Updates the cleaned output (`juror_cleaned_output.csv`) accordingly
+
+### ✅ Sample Correction (2014 DUI Trial)
+| Metric              | Before (Incorrect) | After (Correct) |
+|---------------------|--------------------|-----------------|
+| Jurors Reporting    | 66                 | 66              |
+| Jurors Not Used     | 26                 | 26              |
+| Jurors Used         | 26 ❌              | 40 ✅           |
+| Utilization Rate    | 39.4% ❌           | 60.6% ✅         |
+
+This correction restores the intended operational insight and sets the baseline for the Power BI dashboard.
+
+
 ### v1.2 – August 2025
 
 - Finalized `juror_etl.py` with dual-path handling and normalized formatting  
