@@ -128,6 +128,14 @@ Thanks to:
 
 ## 🗂️ Version History
 
+### v1.2 – August 2025
+
+- Finalized `juror_etl.py` with dual-path handling and normalized formatting  
+- Added validation confidence reporting with traceable column mapping  
+- Introduced anonymized 20-row sample dataset for public reference  
+- Updated `README.md` to reflect current pipeline, and added new **Validation** section  
+- Emphasized that this is a **baseline directional analysis** to support future jury operations insights  
+
 ### v1.1 – August 2025
 - Added `Jurors Not Used` as a calculated column (Reporting - Used)
 - Filtered out rows missing essential values (`Case No.` or `Jurors Reporting`)
