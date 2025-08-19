@@ -1,21 +1,21 @@
-Jurors Reporting,Jurors Not Used,Utilization Rate,Case Type,Civil,Case Category,Charges,Penal Codes
-45,12,0.7333,Criminal,,Misdemeanor,Petty Theft,PC 484
-38,5,0.8684,Criminal,,Felony,Burglary,PC 459
-52,15,0.7115,Civil,Yes,Personal Injury,Negligence,Civ Code 1714
-61,20,0.6721,Criminal,,Felony,Assault,PC 245
-49,8,0.8367,Civil,Yes,Contract,Breach of Contract,Civ Code 3300
-34,4,0.8824,Criminal,,Misdemeanor,DUI,VC 23152
-58,18,0.6897,Criminal,,Felony,Drug Possession,HS 11350
-41,10,0.7561,Civil,Yes,Employment,Wrongful Termination,Gov Code 12940
-46,7,0.8478,Criminal,,Misdemeanor,Trespassing,PC 602
-39,6,0.8462,Civil,Yes,Property,Landlord-Tenant,Civ Code 1940
-50,13,0.74,Criminal,,Felony,Grand Theft Auto,PC 487
-37,5,0.8649,Criminal,,Misdemeanor,Public Intoxication,PC 647(f)
-59,17,0.7119,Civil,Yes,Medical,Malpractice,BPC 2052
-62,22,0.6452,Criminal,,Felony,Armed Robbery,PC 211
-47,9,0.8085,Civil,Yes,Consumer,Fraud,Civ Code 1770
-36,4,0.8889,Criminal,,Misdemeanor,Loitering,PC 653
-44,6,0.8636,Civil,Yes,Insurance,Bad Faith,Ins Code 790.03
-53,14,0.7358,Criminal,,Felony,Domestic Violence,PC 273.5
-60,19,0.6833,Civil,Yes,Construction,Defect,Civ Code 895
-43,7,0.8372,Criminal,,Misdemeanor,Reckless Driving,VC 23103
+Case No.,Jurors Reporting,Jurors Not Used,Jurors Used,Utilization Rate,Case Type,Civil,Charges,Penal Codes,Source File
+[REDACTED],78,30,48,61.5,Civil,Yes,Example Charge,12345 PC,sample_0001.csv
+[REDACTED],91,11,80,87.9,Misdemeanor,,Example Charge,12345 PC,sample_0002.csv
+[REDACTED],68,33,35,51.5,Misdemeanor,,Example Charge,12345 PC,sample_0003.csv
+[REDACTED],54,21,33,61.1,Civil,Yes,Example Charge,12345 PC,sample_0004.csv
+[REDACTED],82,39,43,52.4,Misdemeanor,,Example Charge,12345 PC,sample_0005.csv
+[REDACTED],47,15,32,68.1,Civil,Yes,Example Charge,12345 PC,sample_0006.csv
+[REDACTED],60,11,49,81.7,Civil,Yes,Example Charge,12345 PC,sample_0007.csv
+[REDACTED],78,37,41,52.6,Felony,,Example Charge,12345 PC,sample_0008.csv
+[REDACTED],97,30,67,69.1,Civil,Yes,Example Charge,12345 PC,sample_0009.csv
+[REDACTED],58,10,48,82.8,Felony,,Example Charge,12345 PC,sample_0010.csv
+[REDACTED],62,21,41,66.1,Civil,Yes,Example Charge,12345 PC,sample_0011.csv
+[REDACTED],50,35,15,30.0,Civil,Yes,Example Charge,12345 PC,sample_0012.csv
+[REDACTED],50,31,19,38.0,Felony,,Example Charge,12345 PC,sample_0013.csv
+[REDACTED],63,38,25,39.7,Felony,,Example Charge,12345 PC,sample_0014.csv
+[REDACTED],92,21,71,77.2,Civil,Yes,Example Charge,12345 PC,sample_0015.csv
+[REDACTED],75,34,41,54.7,Misdemeanor,,Example Charge,12345 PC,sample_0016.csv
+[REDACTED],79,26,53,67.1,Felony,,Example Charge,12345 PC,sample_0017.csv
+[REDACTED],63,36,27,42.9,Misdemeanor,,Example Charge,12345 PC,sample_0018.csv
+[REDACTED],42,36,6,14.3,Misdemeanor,,Example Charge,12345 PC,sample_0019.csv
+[REDACTED],61,19,42,68.9,Misdemeanor,,Example Charge,12345 PC,sample_0020.csv
