@@ -196,4 +196,9 @@ This upcoming visualization layer will be built using accessible tools such as E
 
 Stay tuned for updates in the next commit cycle.
 
+📌 Project Status: Proof of Concept
+This version demonstrates a validated approach to analyzing juror utilization using raw Excel exports.  
+While this prototype is scoped to many locations over many years, the structure supports scalable reporting once simplification and column normalization are implemented.
+Future work will streamline these inputs to reduce friction and increase reusability.
+
 
